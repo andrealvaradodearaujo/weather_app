@@ -5,7 +5,11 @@ abstract class Failure{
 }
 
 // General failures
-class GenericFailure extends Failure {}
+class GenericFailure extends Failure {
+  final String? message;
+
+  GenericFailure([this.message]);
+}
 
 class ServerFailure extends Failure {
   final int statusCode;
