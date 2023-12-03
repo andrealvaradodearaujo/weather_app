@@ -5,6 +5,9 @@ class Strings {
   static const String cityMelbourneAustralia = "Melbourne, Australia";
   static const String cityMonteCarloMonaco = "Monte Carlo, Monaco";
 
-  // #1 Error messages
+  // #2 Error messages
   static const String invalidCity = "Invalid city";
+
+  // #3
+  static const String searchCity = "Search city";
 }

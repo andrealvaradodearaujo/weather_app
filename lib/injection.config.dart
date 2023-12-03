@@ -8,19 +8,21 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:dio/dio.dart' as _i4;
+import 'package:dio/dio.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:weather_app/features/data/datasources/weather_remote_data_source.dart'
-    as _i3;
+    as _i4;
 import 'package:weather_app/features/data/repositories/weather_repository_impl.dart'
-    as _i6;
-import 'package:weather_app/features/domain/repositories/weather_repository.dart'
-    as _i5;
-import 'package:weather_app/features/domain/usecases/get_current_weather_use_case.dart'
     as _i7;
-import 'package:weather_app/features/domain/usecases/get_next_days_forecast_use_case.dart'
+import 'package:weather_app/features/domain/repositories/weather_repository.dart'
+    as _i6;
+import 'package:weather_app/features/domain/usecases/get_current_weather_use_case.dart'
     as _i8;
+import 'package:weather_app/features/domain/usecases/get_next_days_forecast_use_case.dart'
+    as _i9;
+import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart'
+    as _i3;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -33,14 +35,15 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.WeatherRemoteDataSource>(
-        () => _i3.WeatherRemoteDataSource(gh<_i4.Dio>()));
-    gh.factory<_i5.WeatherRepository>(
-        () => _i6.WeatherRepositoryImpl(gh<_i3.WeatherRemoteDataSource>()));
-    gh.factory<_i7.GetCurrentWeatherUseCase>(
-        () => _i7.GetCurrentWeatherUseCase(gh<_i5.WeatherRepository>()));
-    gh.factory<_i8.GetNextDaysForecastUseCase>(
-        () => _i8.GetNextDaysForecastUseCase(gh<_i5.WeatherRepository>()));
+    gh.factory<_i3.CitiesBloc>(() => _i3.CitiesBloc());
+    gh.factory<_i4.WeatherRemoteDataSource>(
+        () => _i4.WeatherRemoteDataSource(gh<_i5.Dio>()));
+    gh.factory<_i6.WeatherRepository>(
+        () => _i7.WeatherRepositoryImpl(gh<_i4.WeatherRemoteDataSource>()));
+    gh.factory<_i8.GetCurrentWeatherUseCase>(
+        () => _i8.GetCurrentWeatherUseCase(gh<_i6.WeatherRepository>()));
+    gh.factory<_i9.GetNextDaysForecastUseCase>(
+        () => _i9.GetNextDaysForecastUseCase(gh<_i6.WeatherRepository>()));
     return this;
   }
 }
