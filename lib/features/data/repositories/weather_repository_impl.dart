@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app/core/error/failure.dart';
+import 'package:weather_app/core/resources/strings.dart';
 import 'package:weather_app/features/data/datasources/weather_remote_data_source.dart';
 import 'package:weather_app/features/data/mappers/weather_data_mappers.dart';
 import 'package:weather_app/features/domain/entities/current_weather.dart';
@@ -49,5 +50,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
     } on Exception catch (_) {
       return Left(GenericFailure());
     }
+  }
+
+  @override
+  List<String> getCities() {
+    return [
+      Strings.citySilverstoneUK,
+      Strings.citySaoPauloBrazil,
+      Strings.cityMelbourneAustralia,
+      Strings.cityMonteCarloMonaco
+    ];
   }
 }

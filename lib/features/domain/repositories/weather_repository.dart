@@ -6,4 +6,5 @@ import 'package:weather_app/features/domain/entities/next_days_forecast.dart';
 abstract class WeatherRepository {
   Future<Either<Failure, CurrentWeather>> getCurrentWeather(double lat, double lon);
   Future<Either<Failure, NextDaysForecast>> getNextDaysForecast(double lat, double lon);
+  List<String> getCities();
 }

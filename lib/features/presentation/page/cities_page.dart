@@ -14,12 +14,7 @@ class CitiesPage extends StatefulWidget {
 class _CitiesPageState extends State<CitiesPage> {
   @override
   void initState() {
-    BlocProvider.of<CitiesBloc>(context).add(const InitializeEvent(cities: [
-      Strings.citySilverstoneUK,
-      Strings.citySaoPauloBrazil,
-      Strings.cityMelbourneAustralia,
-      Strings.cityMonteCarloMonaco
-    ]));
+    BlocProvider.of<CitiesBloc>(context).add(InitializeEvent());
     super.initState();
   }
 

@@ -1,18 +1,13 @@
 part of 'cities_bloc.dart';
 
 @immutable
-abstract class CitiesEvent {
-  final List<String> cities;
-
-  const CitiesEvent({required this.cities});
-}
+abstract class CitiesEvent {}
 
 class SearchCityEvent extends CitiesEvent {
   final String city;
+  final List<String> cities;
 
-  const SearchCityEvent({required super.cities, required this.city});
+  SearchCityEvent({required this.cities, required this.city});
 }
 
-class InitializeEvent extends CitiesEvent {
-  const InitializeEvent({required super.cities});
-}
+class InitializeEvent extends CitiesEvent {}

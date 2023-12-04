@@ -2,16 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:weather_app/core/resources/dart_extensions/string_extensions.dart';
+import 'package:weather_app/features/domain/usecases/get_cities_use_case.dart';
 
 part 'cities_events.dart';
 part 'cities_states.dart';
 
 @injectable
 class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
-  CitiesBloc() : super(InitialState()) {
+  CitiesBloc(
+    this._getCitiesUseCase,
+  ) : super(InitialState()) {
     on<SearchCityEvent>(_onSearchCity);
     on<InitializeEvent>(_onInitialize);
   }
+
+  final GetCitiesUseCase _getCitiesUseCase;
 
   Future<void> _onSearchCity(
     SearchCityEvent event,
@@ -27,6 +32,7 @@ class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
     InitializeEvent event,
     Emitter<CitiesState> emit,
   ) async {
-    emit(CitiesLoadedState(allCities: event.cities, filteredCities: event.cities));
+    final cities = _getCitiesUseCase();
+    emit(CitiesLoadedState(allCities: cities, filteredCities: cities));
   }
 }
