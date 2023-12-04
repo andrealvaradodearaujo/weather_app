@@ -10,20 +10,21 @@ class CurrentWeather {
     this.humidity,
     this.mainGroupWeather,
     this.description,
-    this.icon,
+    this.iconUrl,
     this.windSpeed,
     this.windDeg,
     this.windGust,
     this.cloudsAll,
     this.visibility,
-    this.sysCountry,
-    this.sysSunrise,
-    this.sysSunset,
+    this.country,
+    this.sunrise,
+    this.sunset,
     this.dt,
     this.rainOneHour,
     this.rainThreeHours,
     this.snowOneHour,
     this.snowThreeHours,
+    this.cityName,
   });
   final double? temp;
   final double? feelsLike;
@@ -35,7 +36,7 @@ class CurrentWeather {
   final double? humidity;
   final String? mainGroupWeather;
   final String? description;
-  final String? icon;
+  final String? iconUrl;
   final double? windSpeed;
   final double? windDeg;
   final double? windGust;
@@ -45,8 +46,9 @@ class CurrentWeather {
   final double? rainThreeHours;
   final double? snowOneHour;
   final double? snowThreeHours;
-  final String? sysCountry;
-  final DateTime? sysSunrise;
-  final DateTime? sysSunset;
+  final String? country;
+  final DateTime? sunrise;
+  final DateTime? sunset;
   final DateTime? dt;
+  final String? cityName;
 }

@@ -22,11 +22,13 @@ class CurrentWeatherModel extends WeatherModel {
     this.snow,
     this.sys,
     this.dt,
+    this.name,
   );
   final RainForCurrentInfoModel? rain;
   final SnowForCurrentInfoModel? snow;
   final SysInfoModel? sys;
   final int? dt;
+  final String? name;
 
   Map<String, dynamic> toJson() => _$CurrentWeatherModelToJson(this);
 

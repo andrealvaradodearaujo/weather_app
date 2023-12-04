@@ -11,7 +11,7 @@ class NextDayWeather {
     this.humidity,
     this.mainGroupWeather,
     this.description,
-    this.icon,
+    this.iconUrl,
     this.windSpeed,
     this.windDeg,
     this.windGust,
@@ -32,7 +32,7 @@ class NextDayWeather {
   final double? pop;
   final String? mainGroupWeather;
   final String? description;
-  final String? icon;
+  final String? iconUrl;
   final double? windSpeed;
   final double? windDeg;
   final double? windGust;

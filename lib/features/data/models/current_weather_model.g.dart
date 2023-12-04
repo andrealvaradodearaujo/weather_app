@@ -27,6 +27,7 @@ CurrentWeatherModel _$CurrentWeatherModelFromJson(Map<String, dynamic> json) =>
           ? null
           : SysInfoModel.fromJson(json['sys'] as Map<String, dynamic>),
       json['dt'] as int?,
+      json['name'] as String?,
     );
 
 Map<String, dynamic> _$CurrentWeatherModelToJson(
@@ -41,4 +42,5 @@ Map<String, dynamic> _$CurrentWeatherModelToJson(
       'snow': instance.snow,
       'sys': instance.sys,
       'dt': instance.dt,
+      'name': instance.name,
     };

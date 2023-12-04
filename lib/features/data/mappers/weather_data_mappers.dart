@@ -16,20 +16,21 @@ extension CurrentWeatherModelDataMappers on CurrentWeatherModel {
       humidity: main.humidity,
       mainGroupWeather: weather[0].main,
       description: weather[0].description,
-      icon: weather[0].icon,
+      iconUrl: 'https://openweathermap.org/img/wn/${weather[0].icon}@2x.png',
       windSpeed: wind.speed,
       windDeg: wind.deg,
       windGust: wind.gust,
       cloudsAll: clouds.all,
       visibility: visibility,
-      sysCountry: sys?.country,
-      sysSunrise: _getDateTime(sys?.sunrise),
-      sysSunset: _getDateTime(sys?.sunset),
+      country: sys?.country,
+      sunrise: _getDateTime(sys?.sunrise),
+      sunset: _getDateTime(sys?.sunset),
       rainOneHour: rain?.oneHour,
       rainThreeHours: rain?.threeHours,
       snowOneHour: snow?.oneHour,
       snowThreeHours: snow?.threeHours,
       dt: _getDateTime(dt),
+      cityName: name,
     );
   }
 
@@ -37,7 +38,7 @@ extension CurrentWeatherModelDataMappers on CurrentWeatherModel {
     if(unixTimestamp == null) return null;
 
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
-    var r = dateTime;//.toUtc();
+    var r = dateTime;
     return r;
   }
 }
@@ -56,7 +57,7 @@ extension NextDayWeatherModelDataMappers on NextDayWeatherModel {
       pop: pop,
       mainGroupWeather: weather[0].main,
       description: weather[0].description,
-      icon: weather[0].icon,
+      iconUrl: 'https://openweathermap.org/img/wn/${weather[0].icon}@2x.png',
       windSpeed: wind.speed,
       windDeg: wind.deg,
       windGust: wind.gust,
