@@ -10,4 +10,10 @@ class Strings {
 
   // #3
   static const String searchCity = "Search city";
+  static const String maxTemperature = "Max";
+  static const String minTemperature = "Min";
+  static const String celsiusUnit = "C";
+  static const String next5DaysForecast = "Next 5 days forecast";
+  static const String moreInfo = "More information";
+
 }

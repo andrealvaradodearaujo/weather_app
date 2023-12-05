@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart';
+import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart';
 import 'package:weather_app/features/presentation/page/cities_page.dart';
+import 'package:weather_app/features/presentation/page/current_weather_page.dart';
+import 'package:weather_app/features/presentation/page/next_days_forecast_page.dart';
 import 'package:weather_app/injection.dart';
 
 void main() {
@@ -13,21 +17,38 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key,});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) => GetIt.I.get<CitiesBloc>(),
-        child: const CitiesPage(),
-      ),
-      builder: (context, widget) {
-        Dimensions(width: 360, height: 640, allowFontScaling: true).init(context);
-        return widget ?? Container();
-      },
+    final routes = RouteMap(
+        routes: {
+          '/': (_) => const MaterialPage(child: CitiesPage()),
+          '/currentWeather': (_) => const MaterialPage(child: CurrentWeatherPage()),
+          '/nextDaysForecast': (_) => const MaterialPage(child: NextDaysForecastPage()),
+        }
+    );
+
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => GetIt.I.get<CitiesBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<CurrentWeatherBloc>(),
+          ),
+        ],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerDelegate: RoutemasterDelegate(routesBuilder: (context) => routes),
+          routeInformationParser: const RoutemasterParser(),
+          builder: (context, widget) {
+            Dimensions(width: 480, height: 800, allowFontScaling: true).init(context);
+            return widget ?? Container();
+          },
+        )
     );
   }
 }
-
