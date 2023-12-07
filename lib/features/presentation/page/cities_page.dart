@@ -51,7 +51,7 @@ class _CitiesPageState extends State<CitiesPage> {
                               return InkWell(
                                 onTap: () {
                                   BlocProvider.of<CurrentWeatherBloc>(context).add(GetCurrentWeatherEvent(city: state.filteredCities[index]));
-                                  Routemaster.of(context).push('/currentWeather');
+                                  Routemaster.of(context).push('/currentWeather/${state.filteredCities[index]}');
                                 },
                                 child: ListTile(
                                   title: Text(state.filteredCities[index]),

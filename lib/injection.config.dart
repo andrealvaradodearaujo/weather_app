@@ -24,9 +24,11 @@ import 'package:weather_app/features/domain/usecases/get_current_weather_use_cas
 import 'package:weather_app/features/domain/usecases/get_next_days_forecast_use_case.dart'
     as _i9;
 import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart'
-    as _i10;
-import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart'
     as _i11;
+import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart'
+    as _i12;
+import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart'
+    as _i10;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -49,10 +51,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i8.GetCurrentWeatherUseCase(gh<_i5.WeatherRepository>()));
     gh.factory<_i9.GetNextDaysForecastUseCase>(
         () => _i9.GetNextDaysForecastUseCase(gh<_i5.WeatherRepository>()));
-    gh.factory<_i10.CitiesBloc>(
-        () => _i10.CitiesBloc(gh<_i7.GetCitiesUseCase>()));
-    gh.factory<_i11.CurrentWeatherBloc>(
-        () => _i11.CurrentWeatherBloc(gh<_i8.GetCurrentWeatherUseCase>()));
+    gh.factory<_i10.NextDaysForecastBloc>(
+        () => _i10.NextDaysForecastBloc(gh<_i9.GetNextDaysForecastUseCase>()));
+    gh.factory<_i11.CitiesBloc>(
+        () => _i11.CitiesBloc(gh<_i7.GetCitiesUseCase>()));
+    gh.factory<_i12.CurrentWeatherBloc>(
+        () => _i12.CurrentWeatherBloc(gh<_i8.GetCurrentWeatherUseCase>()));
     return this;
   }
 }

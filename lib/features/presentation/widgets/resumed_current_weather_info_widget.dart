@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/core/resources/strings.dart';
 import 'package:weather_app/core/ui/rounded_button.dart';
+import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
 
 class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
   const ResumedCurrentWeatherInfoWidget({
@@ -13,6 +15,7 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
     this.weatherGroup,
     this.minTemperature,
     this.maxTemperature,
+    this.cityCountry
   });
 
   final String? cityName;
@@ -21,6 +24,7 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
   final String? weatherGroup;
   final double? minTemperature;
   final double? maxTemperature;
+  final String? cityCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +116,10 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
           height: 15.h,
         ),
         RoundedButton(
-          onTapFunction: () => Routemaster.of(context).push('/nextDaysForecast'),
+          onTapFunction: () {
+            BlocProvider.of<NextDaysForecastBloc>(context).add(GetNextDaysForecastEvent(city: cityCountry ?? ""));
+            Routemaster.of(context).push('/nextDaysForecast');
+          },
           text: Strings.next5DaysForecast,
         ),
         SizedBox(

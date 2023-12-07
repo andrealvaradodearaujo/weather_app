@@ -5,7 +5,9 @@ import 'package:weather_app/features/presentation/bloc/current_weather/current_w
 import 'package:weather_app/features/presentation/widgets/current_weather_widget.dart';
 
 class CurrentWeatherPage extends StatefulWidget {
-  const CurrentWeatherPage({super.key});
+  const CurrentWeatherPage({super.key, required this.cityCountry});
+  
+  final String? cityCountry;
 
   @override
   State<CurrentWeatherPage> createState() => _CurrentWeatherPageState();
@@ -31,7 +33,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
             ),
           );
         } else if (state is SuccessState) {
-          return CurrentWeatherWidget(cw: state.currentWeather);
+          return CurrentWeatherWidget(cw: state.currentWeather, cityCountry: widget.cityCountry,);
         }
         return Container();
       },

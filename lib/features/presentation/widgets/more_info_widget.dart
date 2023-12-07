@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/resources/dart_extensions/date_extensions.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/core/resources/strings.dart';
 import 'package:weather_app/features/presentation/widgets/more_info_item_widget.dart';
@@ -6,44 +7,44 @@ import 'package:weather_app/features/presentation/widgets/more_info_item_widget.
 class MoreInfoWidget extends StatelessWidget {
   const MoreInfoWidget({
     super.key,
-    this.feelsLike,
-    this.seaLevel,
-    this.grndLevel,
-    this.humidity,
-    this.weatherCondition,
-    this.windSpeed,
-    this.windDeg,
-    this.windGust,
-    this.cloudsAll,
-    this.visibility,
-    this.rainOneHour,
-    this.rainThreeHours,
-    this.snowOneHour,
-    this.snowThreeHours,
-    this.city,
-    this.country,
-    this.sunrise,
-    this.sunset,
+    this.feelsLike,  
+    this.seaLevel,  
+    this.grndLevel,  
+    this.humidity,  
+    this.weatherCondition,  
+    this.windSpeed,  
+    this.windDeg,  
+    this.windGust,  
+    this.cloudsAll,  
+    this.visibility,  
+    this.rainOneHour,  
+    this.rainThreeHours,  
+    this.snowOneHour,  
+    this.snowThreeHours,  
+    this.city,  
+    this.country,  
+    this.sunrise,  
+    this.sunset,  
   });
 
-  final double? feelsLike; ///OK
+  final double? feelsLike;
   final double? seaLevel;
   final double? grndLevel;
-  final double? humidity; ///OK
-  final String? weatherCondition; ///OK
-  final double? windSpeed; ///OK
-  final double? windDeg; ///OK
-  final double? windGust; ///OK
-  final double? cloudsAll; ///OK
-  final double? visibility; ///OK
-  final double? rainOneHour;///OK
-  final double? rainThreeHours;///OK
-  final double? snowOneHour;///OK
-  final double? snowThreeHours;///OK
-  final String? city; ///OK
-  final String? country; ///OK
-  final DateTime? sunrise; ///OK
-  final DateTime? sunset; ///OK
+  final double? humidity;
+  final String? weatherCondition;
+  final double? windSpeed;
+  final double? windDeg;
+  final double? windGust;
+  final double? cloudsAll;
+  final double? visibility;
+  final double? rainOneHour;
+  final double? rainThreeHours;
+  final double? snowOneHour;
+  final double? snowThreeHours;
+  final String? city;
+  final String? country;
+  final DateTime? sunrise;
+  final DateTime? sunset;
 
   @override
   Widget build(BuildContext context) {
@@ -68,88 +69,88 @@ class MoreInfoWidget extends StatelessWidget {
           ),
           if (feelsLike != null)
             MoreInfoItemWidget(
-              leftText: "RealFeel",
-              rightText: "$feelsLikeºC",
+              leftText: Strings.realFeel,
+              rightText: "$feelsLike${Strings.celsiusDegree}",
             ),
           if (humidity != null)
             MoreInfoItemWidget(
-              leftText: "Humidity",
-              rightText: "$humidity%",
+              leftText: Strings.humidity,
+              rightText: "$humidity${Strings.percentage}",
             ),
           if (rainOneHour != null)
             MoreInfoItemWidget(
-              leftText: "Rain vol. 1h",
-              rightText: "$rainOneHour mm",
+              leftText: Strings.rainVolOneHour,
+              rightText: "$rainOneHour ${Strings.millimeters}",
             ),
           if (rainThreeHours != null)
             MoreInfoItemWidget(
-              leftText: "Rain vol. 3h",
-              rightText: "$rainThreeHours mm",
+              leftText: Strings.rainVolThreeHour,
+              rightText: "$rainThreeHours ${Strings.millimeters}",
             ),
           if (snowOneHour != null)
             MoreInfoItemWidget(
-              leftText: "Snow vol. 1h",
-              rightText: "$snowOneHour mm",
+              leftText: Strings.snowVolOneHour,
+              rightText: "$snowOneHour ${Strings.millimeters}",
             ),
           if (snowThreeHours != null)
             MoreInfoItemWidget(
-              leftText: "Snow vol. 3h",
-              rightText: "$snowThreeHours mm",
+              leftText: Strings.snowVolThreeHour,
+              rightText: "$snowThreeHours ${Strings.millimeters}",
             ),
           if (weatherCondition != null)
             MoreInfoItemWidget(
-              leftText: "Weather condition",
+              leftText: Strings.weatherCondition,
               rightText: weatherCondition!,
             ),
           if (sunrise != null)
             MoreInfoItemWidget(
-              leftText: "Sunrise time",
-              rightText: sunrise.toString(),//TODO: DateFormat('yyyy-MM-ddTHH:mm').format(sunrise),
+              leftText: Strings.sunriseTime,
+              rightText: sunrise!.formatDateTime(),
             ),
           if (sunset != null)
             MoreInfoItemWidget(
-              leftText: "Sunset time",
-              rightText: sunset.toString(),//TODO: DateFormat('yyyy-MM-ddTHH:mm').format(sunrise),
+              leftText: Strings.sunsetTime,
+              rightText: sunset!.formatDateTime(),
             ),
           if (city != null && country != null)
             MoreInfoItemWidget(
-              leftText: "City, Country",
+              leftText: Strings.cityCountry,
               rightText: "$city, $country"
             ),
           if (windSpeed != null)
             MoreInfoItemWidget(
-              leftText: "Wind",
-              rightText: "$windSpeed m/sº",
+              leftText: Strings.wind,
+              rightText: "$windSpeed ${Strings.metersPerSeconds}",
             ),
           if (windDeg != null)
             MoreInfoItemWidget(
-              leftText: "Wind direction",
-              rightText: "$windDegº",
+              leftText: Strings.windDirection,
+              rightText: "$windDeg${Strings.degree}",
             ),
           if (windGust != null)
             MoreInfoItemWidget(
-              leftText: "Wind gust",
-              rightText: "$windGust m/sº",
+              leftText: Strings.windGust,
+              rightText: "$windGust ${Strings.metersPerSeconds}",
             ),
           if (visibility != null)
             MoreInfoItemWidget(
-              leftText: "Visibility",
-              rightText: "$visibility m",
+              leftText: Strings.visibility,
+              rightText: "$visibility ${Strings.meters}",
             ),
           if (cloudsAll != null)
             MoreInfoItemWidget(
-              leftText: "Cloudiness",
-              rightText: "$cloudsAll%",
+              leftText: Strings.cloudiness,
+              rightText: "$cloudsAll${Strings.percentage}",
             ),
           if (seaLevel != null)
             MoreInfoItemWidget(
-              leftText: "Sea-level atm. pressure",
-              rightText: "$seaLevel hPa",
+              leftText: Strings.seaLevelAtmPressure,
+              rightText: "$seaLevel ${Strings.hPa}",
             ),
           if (grndLevel != null)
             MoreInfoItemWidget(
-              leftText: "Ground-level atm. pressure",
-              rightText: "$grndLevel hPa",
+              leftText: Strings.groundLevelAtmPressure,
+              rightText: "$grndLevel ${Strings.hPa}",
             ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart';
 import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart';
+import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
 import 'package:weather_app/features/presentation/page/cities_page.dart';
 import 'package:weather_app/features/presentation/page/current_weather_page.dart';
 import 'package:weather_app/features/presentation/page/next_days_forecast_page.dart';
@@ -26,7 +27,12 @@ class MyApp extends StatelessWidget {
     final routes = RouteMap(
         routes: {
           '/': (_) => const MaterialPage(child: CitiesPage()),
-          '/currentWeather': (_) => const MaterialPage(child: CurrentWeatherPage()),
+          '/currentWeather/:cityCountry': (info) {
+            final decodedCityCountry = Uri.decodeComponent(info.pathParameters['cityCountry'] ?? '');
+            return MaterialPage(
+              child: CurrentWeatherPage(cityCountry: decodedCityCountry),
+            );
+            },
           '/nextDaysForecast': (_) => const MaterialPage(child: NextDaysForecastPage()),
         }
     );
@@ -38,6 +44,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<CurrentWeatherBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<NextDaysForecastBloc>(),
           ),
         ],
         child: MaterialApp.router(

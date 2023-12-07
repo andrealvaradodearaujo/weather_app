@@ -1,35 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
+import 'package:weather_app/core/ui/loading_widget.dart';
+import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
+import 'package:weather_app/features/presentation/widgets/next_day_forecast_widget.dart';
 
-class NextDaysForecastPage extends StatefulWidget {
+class NextDaysForecastPage extends StatelessWidget {
   const NextDaysForecastPage({super.key});
 
   @override
-  State<NextDaysForecastPage> createState() => _NextDaysForecastPageState();
-}
-
-class _NextDaysForecastPageState extends State<NextDaysForecastPage> {
-  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20.h,
+    return BlocBuilder<NextDaysForecastBloc, NextDaysForecastState>(
+      builder: (context, state) {
+        if (state is LoadingState) {
+          return const Scaffold(
+            body: Center(
+              child: LoadingWidget(),
+            ),
+          );
+        } else if (state is ErrorState) {
+          //TODO: implement better error state scenario
+          return const Scaffold(
+            body: Center(
+              child: Text("There is no next days forecast available"),
+            ),
+          );
+        } else if (state is SuccessState) {
+          List<Widget> result = [];
+          state.nextDaysForecast.map.forEach(
+            (currentDay, nextDaysForecastList) {
+              result.add(
+                NextDayForecastWidget(
+                  currentDay: currentDay,
+                  nextDayWeatherList: nextDaysForecastList,
                 ),
-                Text(
-                  "Temporary",
-                  style: TextStyle(
-                    fontSize: 50.sp,
-                    color: Colors.black,
+              );
+              result.add(
+                SizedBox(
+                  height: 40.h,
+                ),
+              );
+            },
+          );
+          return SafeArea(
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: Dimensions.I.getEdgeInsetsAll(20.w),
+                  child: Column(
+                      children: result
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        )
+          );
+        }
+        return Container();
+      },
     );
   }
 }
