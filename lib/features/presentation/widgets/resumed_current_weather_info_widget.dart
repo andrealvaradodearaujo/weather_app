@@ -15,7 +15,8 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
     this.weatherGroup,
     this.minTemperature,
     this.maxTemperature,
-    this.cityCountry
+    this.cityCountry,
+    this.hasNext5DaysButton = true,
   });
 
   final String? cityName;
@@ -25,6 +26,7 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
   final double? minTemperature;
   final double? maxTemperature;
   final String? cityCountry;
+  final bool hasNext5DaysButton;
 
   @override
   Widget build(BuildContext context) {
@@ -112,16 +114,21 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
               ),
           ],
         ),
-        SizedBox(
-          height: 15.h,
-        ),
-        RoundedButton(
-          onTapFunction: () {
-            BlocProvider.of<NextDaysForecastBloc>(context).add(GetNextDaysForecastEvent(city: cityCountry ?? ""));
-            Routemaster.of(context).push('/nextDaysForecast');
-          },
-          text: Strings.next5DaysForecast,
-        ),
+        if (hasNext5DaysButton)
+          Column(
+            children: [
+              SizedBox(
+                height: 15.h,
+              ),
+              RoundedButton(
+                onTapFunction: () {
+                  BlocProvider.of<NextDaysForecastBloc>(context).add(GetNextDaysForecastEvent(city: cityCountry ?? ""));
+                  Routemaster.of(context).push('/nextDaysForecast/$cityCountry');
+                },
+                text: Strings.next5DaysForecast,
+              )
+            ],
+          ),
         SizedBox(
           height: 10.h,
         ),

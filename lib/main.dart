@@ -24,18 +24,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routes = RouteMap(
-        routes: {
-          '/': (_) => const MaterialPage(child: CitiesPage()),
-          '/currentWeather/:cityCountry': (info) {
-            final decodedCityCountry = Uri.decodeComponent(info.pathParameters['cityCountry'] ?? '');
-            return MaterialPage(
-              child: CurrentWeatherPage(cityCountry: decodedCityCountry),
-            );
-            },
-          '/nextDaysForecast': (_) => const MaterialPage(child: NextDaysForecastPage()),
-        }
-    );
+    final routes = RouteMap(routes: {
+      '/': (_) => const MaterialPage(child: CitiesPage()),
+      '/currentWeather/:cityCountry': (info) {
+        final decodedCityCountry = Uri.decodeComponent(info.pathParameters['cityCountry'] ?? '');
+        return MaterialPage(
+          child: CurrentWeatherPage(cityCountry: decodedCityCountry),
+        );
+      },
+      '/nextDaysForecast/:cityCountry': (info) {
+        final decodedCityCountry = Uri.decodeComponent(info.pathParameters['cityCountry'] ?? '');
+        return MaterialPage(
+          child: NextDaysForecastPage(cityCountry: decodedCityCountry),
+        );
+      },
+    });
 
     return MultiBlocProvider(
         providers: [
@@ -57,7 +60,6 @@ class MyApp extends StatelessWidget {
             Dimensions(width: 480, height: 800, allowFontScaling: true).init(context);
             return widget ?? Container();
           },
-        )
-    );
+        ));
   }
 }
