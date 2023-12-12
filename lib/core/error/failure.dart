@@ -12,13 +12,30 @@ class GenericFailure extends Failure {
 }
 
 class ServerFailure extends Failure {
-  final int statusCode;
   final String message;
 
-  ServerFailure({required this.statusCode, required this.message});
+  ServerFailure({required this.message});
 }
 
-class CacheFailure extends Failure {}
+abstract class CacheFailure extends Failure {}
+
+class CacheDataNotFoundFailure extends CacheFailure {
+  final String message;
+
+  CacheDataNotFoundFailure({required this.message});
+}
+
+class CacheStorageFailure extends CacheFailure {
+  final String message;
+
+  CacheStorageFailure({required this.message});
+}
+
+class CacheCurrentWeatherFailure extends CacheFailure {
+  final String message;
+
+  CacheCurrentWeatherFailure({required this.message});
+}
 
 class NoInternetConnectionFailure extends Failure {}
 

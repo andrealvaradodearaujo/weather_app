@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:weather_app/core/ui/error_page.dart';
 import 'package:weather_app/core/ui/loading_widget.dart';
 import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart';
 import 'package:weather_app/features/presentation/widgets/current_weather_widget.dart';
 
-class CurrentWeatherPage extends StatefulWidget {
+class CurrentWeatherPage extends StatelessWidget {
   const CurrentWeatherPage({super.key, required this.cityCountry});
-  
+
   final String? cityCountry;
-
-  @override
-  State<CurrentWeatherPage> createState() => _CurrentWeatherPageState();
-}
-
-class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +22,18 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
             ),
           );
         } else if (state is ErrorState) {
-          //TODO: implement better error state scenario
-          return const Scaffold(
-            body: Center(
-              child: Text("There is no current weather available"),
-            ),
+          return ErrorPage(
+            onTryAgainFunction: () {
+              BlocProvider.of<CurrentWeatherBloc>(context).add(GetCurrentWeatherEvent(city: cityCountry ?? ""));
+              Routemaster.of(context).push('/currentWeather/$cityCountry');
+            },
+            text: state.message,
           );
         } else if (state is SuccessState) {
-          return CurrentWeatherWidget(cw: state.currentWeather, cityCountry: widget.cityCountry,);
+          return CurrentWeatherWidget(
+            cw: state.currentWeather,
+            cityCountry: cityCountry,
+          );
         }
         return Container();
       },

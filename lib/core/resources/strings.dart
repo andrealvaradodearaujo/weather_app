@@ -7,6 +7,7 @@ class Strings {
 
   // #2 Error messages
   static const String invalidCity = "Invalid city";
+  static const String noCurrentWeatherAvailable =  "There is no current weather available";
 
   // #3
   static const String searchCity = "Search city";
@@ -32,6 +33,7 @@ class Strings {
   static const String cloudiness = "Cloudiness";
   static const String seaLevelAtmPressure = "Sea-level atm. pressure";
   static const String groundLevelAtmPressure = "Ground-level atm. pressure";
+  static const String tryAgain = "Try again";
 
   // #4 units
   static const String degree = "º";

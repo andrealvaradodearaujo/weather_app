@@ -5,6 +5,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('HH:mm').format(this);
   }
 
+  String formatDay() {
+    return DateFormat('yyyy/MM/dd').format(this);
+  }
+
   String formatDateTime() {
     return DateFormat('yyyy/MM/dd HH:mm\'h\'').format(this);
   }

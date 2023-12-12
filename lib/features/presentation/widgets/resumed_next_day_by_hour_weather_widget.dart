@@ -50,6 +50,11 @@ class ResumedNextDayByHourWeatherWidget extends StatelessWidget {
                   width: 70.w,
                   height: 70.w,
                   fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                    return const SizedBox(
+                      width: 0,
+                    );
+                  },
                 ),
               ),
             if (temperature != null)

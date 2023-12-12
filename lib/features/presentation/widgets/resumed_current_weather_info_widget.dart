@@ -52,6 +52,11 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
                 width: 150.w,
                 height: 150.w,
                 fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                  return const SizedBox(
+                    width: 0,
+                  );
+                },
               ),
             if (temperature != null)
               Row(

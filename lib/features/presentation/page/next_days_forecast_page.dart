@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
+import 'package:weather_app/core/ui/error_page.dart';
 import 'package:weather_app/core/ui/loading_widget.dart';
 import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
 import 'package:weather_app/features/presentation/widgets/next_day_forecast_widget.dart';
@@ -22,11 +23,12 @@ class NextDaysForecastPage extends StatelessWidget {
             ),
           );
         } else if (state is ErrorState) {
-          //TODO: implement better error state scenario
-          return const Scaffold(
-            body: Center(
-              child: Text("There is no next days forecast available"),
-            ),
+          return ErrorPage(
+            onTryAgainFunction: () {
+              BlocProvider.of<NextDaysForecastBloc>(context).add(GetNextDaysForecastEvent(city: cityCountry ?? ""));
+              Routemaster.of(context).push('/nextDaysForecast/$cityCountry');
+            },
+            text: state.message,
           );
         } else if (state is SuccessState) {
           List<Widget> result = [];
@@ -52,7 +54,7 @@ class NextDaysForecastPage extends StatelessWidget {
                 scrolledUnderElevation: 0,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),
-                  onPressed: () => Routemaster.of(context).pop(),
+                  onPressed: () => Routemaster.of(context).history.back(),
                 ),
               ),
               body: SingleChildScrollView(

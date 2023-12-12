@@ -9,5 +9,12 @@ class ServerException implements Exception {
         message = message ?? 'Server Exception';
 }
 
-class CacheException implements Exception {}
+abstract class CacheException implements Exception {}
 
+class CacheDataNotFoundException implements CacheException {}
+
+class CacheStorageException implements CacheException {}
+
+class CacheCurrentWeatherException implements CacheException {}
+
+class CacheNextDayWeatherModelListException implements CacheException {}
