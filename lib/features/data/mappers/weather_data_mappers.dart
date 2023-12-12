@@ -3,7 +3,9 @@ import 'package:weather_app/features/data/models/next_day_weather_model.dart';
 import 'package:weather_app/features/domain/entities/current_weather.dart';
 import 'package:weather_app/features/domain/entities/next_day_weather.dart';
 
+/// Extension on [CurrentWeatherModel] providing mapping functions to convert to corresponding domain entities.
 extension CurrentWeatherModelDataMappers on CurrentWeatherModel {
+  /// Maps [CurrentWeatherModel] to [CurrentWeather] entity.
   CurrentWeather toCurrentWeather() {
     return CurrentWeather(
       temp: main.temp,
@@ -34,16 +36,16 @@ extension CurrentWeatherModelDataMappers on CurrentWeatherModel {
     );
   }
 
+  /// Converts Unix timestamp to [DateTime].
   DateTime? _getDateTime(int? unixTimestamp) {
-    if(unixTimestamp == null) return null;
-
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
-    var r = dateTime;
-    return r;
+    if (unixTimestamp == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
   }
 }
 
+/// Extension on [NextDayWeatherModel] providing mapping functions to convert to corresponding domain entities.
 extension NextDayWeatherModelDataMappers on NextDayWeatherModel {
+  /// Maps [NextDayWeatherModel] to [NextDayWeather] entity.
   NextDayWeather toNextDayWeather() {
     return NextDayWeather(
       temp: main.temp,
@@ -69,10 +71,8 @@ extension NextDayWeatherModelDataMappers on NextDayWeatherModel {
     );
   }
 
+  /// Converts Unix timestamp to [DateTime].
   DateTime _getDateTime(int unixTimestamp) {
-
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
-    var r = dateTime;//.toUtc();
-    return r;
+    return DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
   }
 }
