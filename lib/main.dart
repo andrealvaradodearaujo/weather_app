@@ -4,12 +4,12 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
-import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart';
-import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart';
-import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
-import 'package:weather_app/features/presentation/page/cities_page.dart';
-import 'package:weather_app/features/presentation/page/current_weather_page.dart';
-import 'package:weather_app/features/presentation/page/next_days_forecast_page.dart';
+import 'package:weather_app/features/weather_app/presentation/bloc/cities/cities_bloc.dart';
+import 'package:weather_app/features/weather_app/presentation/bloc/current_weather/current_weather_bloc.dart';
+import 'package:weather_app/features/weather_app/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
+import 'package:weather_app/features/weather_app/presentation/page/cities_page.dart';
+import 'package:weather_app/features/weather_app/presentation/page/current_weather_page.dart';
+import 'package:weather_app/features/weather_app/presentation/page/next_days_forecast_page.dart';
 import 'package:weather_app/injection.dart';
 
 Future<void> main() async {

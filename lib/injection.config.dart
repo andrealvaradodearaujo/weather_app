@@ -12,25 +12,25 @@ import 'package:dio/dio.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
-import 'package:weather_app/features/data/datasources/weather_local_data_source.dart'
+import 'package:weather_app/features/weather_app/data/datasources/weather_local_data_source.dart'
     as _i3;
-import 'package:weather_app/features/data/datasources/weather_remote_data_source.dart'
+import 'package:weather_app/features/weather_app/data/datasources/weather_remote_data_source.dart'
     as _i5;
-import 'package:weather_app/features/data/repositories/weather_repository_impl.dart'
+import 'package:weather_app/features/weather_app/data/repositories/weather_repository_impl.dart'
     as _i8;
-import 'package:weather_app/features/domain/repositories/weather_repository.dart'
+import 'package:weather_app/features/weather_app/domain/repositories/weather_repository.dart'
     as _i7;
-import 'package:weather_app/features/domain/usecases/get_cities_use_case.dart'
+import 'package:weather_app/features/weather_app/domain/usecases/get_cities_use_case.dart'
     as _i9;
-import 'package:weather_app/features/domain/usecases/get_current_weather_use_case.dart'
+import 'package:weather_app/features/weather_app/domain/usecases/get_current_weather_use_case.dart'
     as _i10;
-import 'package:weather_app/features/domain/usecases/get_next_days_forecast_use_case.dart'
+import 'package:weather_app/features/weather_app/domain/usecases/get_next_days_forecast_use_case.dart'
     as _i11;
-import 'package:weather_app/features/presentation/bloc/cities/cities_bloc.dart'
+import 'package:weather_app/features/weather_app/presentation/bloc/cities/cities_bloc.dart'
     as _i13;
-import 'package:weather_app/features/presentation/bloc/current_weather/current_weather_bloc.dart'
+import 'package:weather_app/features/weather_app/presentation/bloc/current_weather/current_weather_bloc.dart'
     as _i14;
-import 'package:weather_app/features/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart'
+import 'package:weather_app/features/weather_app/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart'
     as _i12;
 
 extension GetItInjectableX on _i1.GetIt {
