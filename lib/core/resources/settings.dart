@@ -12,6 +12,4 @@ class Settings {
 
   static const latMonteCarloMO = 43.7496;
   static const lonMonteCarloMO = 7.437;
-
-  static const appid = '40393c91c070c0eb9217f50f55715900';
 }
