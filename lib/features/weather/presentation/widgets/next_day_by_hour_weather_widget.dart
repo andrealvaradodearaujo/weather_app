@@ -52,8 +52,6 @@ class NextDayByHourWeatherWidget extends StatelessWidget {
                     visibility: ndw.visibility,
                     rainThreeHours: ndw.rainThreeHours,
                     snowThreeHours: ndw.snowThreeHours,
-                    city: ndw.city,
-                    country: ndw.country,
                   )
                 ],
               ),

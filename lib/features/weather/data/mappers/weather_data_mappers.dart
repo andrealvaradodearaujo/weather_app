@@ -1,3 +1,4 @@
+import 'package:weather_app/core/resources/dart_extensions/date_extensions.dart';
 import 'package:weather_app/features/weather/data/models/current_weather_model.dart';
 import 'package:weather_app/features/weather/data/models/next_day_weather_model.dart';
 import 'package:weather_app/features/weather/domain/entities/current_weather.dart';
@@ -25,21 +26,15 @@ extension CurrentWeatherModelDataMappers on CurrentWeatherModel {
       cloudsAll: clouds.all,
       visibility: visibility,
       country: sys?.country,
-      sunrise: _getDateTime(sys?.sunrise),
-      sunset: _getDateTime(sys?.sunset),
+      sunrise: sys?.sunrise?.getDateTimeFromUnixTimestamp(),
+      sunset: sys?.sunset?.getDateTimeFromUnixTimestamp(),
       rainOneHour: rain?.oneHour,
       rainThreeHours: rain?.threeHours,
       snowOneHour: snow?.oneHour,
       snowThreeHours: snow?.threeHours,
-      dt: _getDateTime(dt),
+      dt: dt?.getDateTimeFromUnixTimestamp(),
       cityName: name,
     );
-  }
-
-  /// Converts Unix timestamp to [DateTime].
-  DateTime? _getDateTime(int? unixTimestamp) {
-    if (unixTimestamp == null) return null;
-    return DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
   }
 }
 
@@ -67,12 +62,7 @@ extension NextDayWeatherModelDataMappers on NextDayWeatherModel {
       visibility: visibility,
       rainThreeHours: rain?.threeHours,
       snowThreeHours: snow?.threeHours,
-      dt: _getDateTime(dt),
+      dt: dt.getDateTimeFromUnixTimestamp(),
     );
-  }
-
-  /// Converts Unix timestamp to [DateTime].
-  DateTime _getDateTime(int unixTimestamp) {
-    return DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
   }
 }

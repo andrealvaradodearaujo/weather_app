@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weather_app/features/weather/data/models/clouds_info_model.dart';
 import 'package:weather_app/features/weather/data/models/main_info_model.dart';
@@ -10,7 +11,7 @@ import 'package:weather_app/features/weather/data/models/wind_info_model.dart';
 part 'next_day_weather_model.g.dart';
 
 @JsonSerializable()
-class NextDayWeatherModel extends WeatherModel {
+class NextDayWeatherModel extends WeatherModel with EquatableMixin{
   NextDayWeatherModel(
     super.main,
     super.weather,
@@ -34,4 +35,17 @@ class NextDayWeatherModel extends WeatherModel {
   static List<NextDayWeatherModel> listFromJson(List<dynamic> json) {
     return json.map((value) => NextDayWeatherModel.fromJson(value)).toList();
   }
+
+  @override
+  List<Object?> get props => [
+    super.main,
+    super.weather,
+    super.wind,
+    super.clouds,
+    super.visibility,
+    rain,
+    snow,
+    pop,
+    dt,
+  ];
 }

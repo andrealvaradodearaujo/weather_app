@@ -3,10 +3,13 @@ part of 'cities_bloc.dart';
 
 /// Base class for states related to the cities functionality.
 @immutable
-abstract class CitiesState {}
+abstract class CitiesState extends Equatable{}
 
 /// Initial state of the [CitiesBloc], representing the state before any events are processed.
-class InitialState extends CitiesState {}
+class InitialState extends CitiesState {
+  @override
+  List<Object?> get props => [];
+}
 
 /// State indicating that cities have been loaded, providing information about all cities and the currently filtered cities.
 ///
@@ -18,4 +21,7 @@ class CitiesLoadedState extends CitiesState {
 
   /// Constructs a [CitiesLoadedState] with the specified [allCities] and [filteredCities].
   CitiesLoadedState({required this.allCities, required this.filteredCities});
+
+  @override
+  List<Object?> get props => [allCities, filteredCities];
 }

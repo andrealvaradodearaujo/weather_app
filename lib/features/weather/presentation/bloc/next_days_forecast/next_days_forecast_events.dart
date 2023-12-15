@@ -3,7 +3,7 @@ part of 'next_days_forecast_bloc.dart';
 
 /// An abstract class representing events that can be triggered in the [NextDaysForecastBloc].
 @immutable
-abstract class NextDaysForecastEvent {}
+abstract class NextDaysForecastEvent extends Equatable {}
 
 /// A specific event that signals the request to fetch the next days' forecast for a given city.
 class GetNextDaysForecastEvent extends NextDaysForecastEvent {
@@ -11,4 +11,7 @@ class GetNextDaysForecastEvent extends NextDaysForecastEvent {
 
   /// Constructs a [GetNextDaysForecastEvent] with the specified [city] parameter.
   GetNextDaysForecastEvent({required this.city});
+
+  @override
+  List<Object?> get props => [city];
 }

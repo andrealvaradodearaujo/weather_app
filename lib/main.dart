@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/features/cities/presentation/bloc/cities_bloc.dart';
@@ -14,7 +13,6 @@ import 'package:weather_app/injection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Logger.level = Level.debug;
   await configureDependencies();
   runApp(const MyApp());
 }

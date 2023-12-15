@@ -64,30 +64,30 @@ class WeatherLocalDataSource {
   }
 
   /// Builds the key for caching the next day weather model list based on the provided [lat], [lon], and [dateTime].
-  String _buildNextDaysForecastKey(double lat, double lon, DateTime dateTime) {
-    return "$_nextDaysForecastKey-lat:$lat-lon:$lon-day:${dateTime.formatDay()}";
+  String _buildNextDaysForecastKey(double lat, double lon, String date) {
+    return "$_nextDaysForecastKey-lat:$lat-lon:$lon-day:$date";
   }
 
   /// Caches the provided list of [NextDayWeatherModel] for a specific [lat], [lon], and [dateTime].
   ///
   /// Throws a [CacheNextDayWeatherModelListException] if an error occurs while saving the data.
   Future<void> cacheNextDayWeatherModelList(
-      double lat, double lon, DateTime dateTime, List<NextDayWeatherModel> list) async {
+      double lat, double lon, String date, List<NextDayWeatherModel> list) async {
     try {
       final encodedNextDayWeatherModel = jsonEncode(list);
-      final key = _buildNextDaysForecastKey(lat, lon, dateTime);
+      final key = _buildNextDaysForecastKey(lat, lon, date);
       await sharedPreferences.setString(key, encodedNextDayWeatherModel);
     } on Exception catch (_) {
       throw CacheNextDayWeatherModelListException(); // Error while saving next day weather model list data
     }
   }
 
-  /// Retrieves the cached list of [NextDayWeatherModel] for a specific [lat], [lon], and [dateTime].
+  /// Retrieves the cached list of [NextDayWeatherModel] for a specific [lat], [lon], and formatted date yyyy/MM/dd [date].
   ///
   /// Throws a [CacheStorageException] for unexpected errors while retrieving the data.
-  Future<List<NextDayWeatherModel>> getNextDayWeatherModelList(double lat, double lon, DateTime dateTime) async {
+  Future<List<NextDayWeatherModel>> getNextDayWeatherModelList(double lat, double lon, String date) async {
     try {
-      final key = _buildNextDaysForecastKey(lat, lon, dateTime);
+      final key = _buildNextDaysForecastKey(lat, lon, date);
       final encodedNextDayWeatherModel = sharedPreferences.getString(key);
       if (encodedNextDayWeatherModel != null) {
         return NextDayWeatherModel.listFromJson(jsonDecode(encodedNextDayWeatherModel));

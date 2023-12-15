@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'main_info_model.g.dart';
 
 @JsonSerializable()
-class MainInfoModel {
-  MainInfoModel(this.temp, this.feelsLike, this.tempMin, this.tempMax, this.pressure,
+class MainInfoModel extends Equatable{
+  const MainInfoModel(this.temp, this.feelsLike, this.tempMin, this.tempMax, this.pressure,
       this.seaLevel, this.grndLevel, this.humidity);
   final double? temp;
   final double? feelsLike;
@@ -18,5 +19,8 @@ class MainInfoModel {
   Map<String, dynamic> toJson() => _$MainInfoModelToJson(this);
 
   factory MainInfoModel.fromJson(Map<String, dynamic> json) => _$MainInfoModelFromJson(json);
+
+  @override
+  List<Object?> get props => [temp, feelsLike, tempMin, tempMax, pressure, seaLevel, grndLevel, humidity];
 
 }

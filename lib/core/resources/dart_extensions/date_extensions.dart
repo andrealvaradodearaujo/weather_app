@@ -17,3 +17,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('EEEE, yyyy/MM/dd').format(this);
   }
 }
+
+extension IntExtension on int {
+  /// Converts Unix timestamp to [DateTime].
+  DateTime getDateTimeFromUnixTimestamp() {
+    return DateTime.fromMillisecondsSinceEpoch(this * 1000);
+  }
+}

@@ -3,7 +3,7 @@ part of 'current_weather_bloc.dart';
 
 /// The base abstract class for events related to the current weather.
 @immutable
-abstract class CurrentWeatherEvent {}
+abstract class CurrentWeatherEvent extends Equatable {}
 
 /// Event triggered to fetch the current weather for a specific city.
 ///
@@ -14,4 +14,7 @@ class GetCurrentWeatherEvent extends CurrentWeatherEvent {
 
   /// Constructs a [GetCurrentWeatherEvent] with the specified [city].
   GetCurrentWeatherEvent({required this.city});
+
+  @override
+  List<Object?> get props => [city];
 }

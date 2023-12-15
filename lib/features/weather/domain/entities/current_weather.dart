@@ -1,5 +1,7 @@
-class CurrentWeather {
-  CurrentWeather({
+import 'package:equatable/equatable.dart';
+
+class CurrentWeather extends Equatable {
+  const CurrentWeather({
     this.temp,
     this.feelsLike,
     this.tempMin,
@@ -26,6 +28,7 @@ class CurrentWeather {
     this.snowThreeHours,
     this.cityName,
   });
+
   final double? temp;
   final double? feelsLike;
   final double? tempMin;
@@ -51,4 +54,33 @@ class CurrentWeather {
   final DateTime? sunset;
   final DateTime? dt;
   final String? cityName;
+
+  @override
+  List<Object?> get props => [
+    temp,
+    feelsLike,
+    tempMin,
+    tempMax,
+    pressure,
+    seaLevel,
+    grndLevel,
+    humidity,
+    mainGroupWeather,
+    description,
+    iconUrl,
+    windSpeed,
+    windDeg,
+    windGust,
+    cloudsAll,
+    visibility,
+    rainOneHour,
+    rainThreeHours,
+    snowOneHour,
+    snowThreeHours,
+    country,
+    sunrise,
+    sunset,
+    dt,
+    cityName,
+  ];
 }

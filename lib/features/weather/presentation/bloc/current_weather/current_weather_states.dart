@@ -3,13 +3,19 @@ part of 'current_weather_bloc.dart';
 
 /// The base abstract class for states related to the current weather.
 @immutable
-abstract class CurrentWeatherState {}
+abstract class CurrentWeatherState extends Equatable {}
 
 /// Represents the loading state when the current weather data is being fetched.
-class LoadingState extends CurrentWeatherState {}
+class LoadingState extends CurrentWeatherState {
+  @override
+  List<Object?> get props => [];
+}
 
 /// Represents the initial state before any operations are performed.
-class InitialState extends CurrentWeatherState {}
+class InitialState extends CurrentWeatherState {
+  @override
+  List<Object?> get props => [];
+}
 
 /// Represents the successful state after fetching the current weather data.
 ///
@@ -20,6 +26,9 @@ class SuccessState extends CurrentWeatherState {
 
   /// Constructs a [SuccessState] with the specified [currentWeather].
   SuccessState({required this.currentWeather});
+
+  @override
+  List<Object?> get props => [currentWeather];
 }
 
 /// Represents the error state when an error occurs while fetching the current weather data.
@@ -31,4 +40,7 @@ class ErrorState extends CurrentWeatherState {
 
   /// Constructs an [ErrorState] with the specified [message].
   ErrorState({required this.message});
+
+  @override
+  List<Object?> get props => [message];
 }

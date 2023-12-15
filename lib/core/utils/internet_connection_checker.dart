@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:injectable/injectable.dart';
 
 /// A utility class for checking internet connectivity.
+@injectable
 class InternetConnectionChecker {
   /// Checks if the device has an active internet connection.
   ///
   /// Returns `true` if there is an internet connection, otherwise `false`.
-  static Future<bool> isInternetAvailable() async {
+  Future<bool> isInternetAvailable() async {
     var connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {

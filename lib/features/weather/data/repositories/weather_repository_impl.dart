@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:weather_app/core/error/exception.dart';
 import 'package:weather_app/core/error/failure.dart';
+import 'package:weather_app/core/resources/dart_extensions/date_extensions.dart';
 import 'package:weather_app/core/utils/internet_connection_checker.dart';
 import 'package:weather_app/features/weather/data/datasources/weather_local_data_source.dart';
 import 'package:weather_app/features/weather/data/models/current_weather_model.dart';
@@ -23,10 +24,12 @@ class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(
     this._weatherRemoteDataSource,
     this._weatherLocalDataSource,
+    this._internetConnectionChecker,
   );
 
   final WeatherRemoteDataSource _weatherRemoteDataSource;
   final WeatherLocalDataSource _weatherLocalDataSource;
+  final InternetConnectionChecker _internetConnectionChecker;
 
   /// Gets the current weather for the given [lat] and [lon] coordinates.
   ///
@@ -35,7 +38,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// If there is no internet connection, it tries to fetch data from the local source.
   @override
   Future<Either<Failure, CurrentWeather>> getCurrentWeather(double lat, double lon) async {
-    if (await InternetConnectionChecker.isInternetAvailable()) {
+    if (await _internetConnectionChecker.isInternetAvailable()) {
       return await _getCurrentWeatherWithInternet(lat, lon);
     }
     return await _getCurrentWeatherWithNoInternet(lat, lon);
@@ -80,7 +83,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     try {
       await _weatherLocalDataSource.cacheCurrentWeatherModel(lat, lon, dateTime, cwm);
     } on CacheCurrentWeatherException catch (_) {
-      GetIt.I.get<Logger>().e('Error caching current weather locally');
+      debugPrint('Error caching current weather locally');
     }
   }
 
@@ -93,7 +96,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   /// or a [Left] containing a [Failure] if an error occurs.
   @override
   Future<Either<Failure, NextDaysForecast>> getNextDaysForecast(double lat, double lon) async {
-    if (await InternetConnectionChecker.isInternetAvailable()) {
+    if (await _internetConnectionChecker.isInternetAvailable()) {
       return await _getNextDaysForecastWithInternet(lat, lon);
     }
     return await _getNextDaysForecastWithNoInternet(lat, lon);
@@ -153,7 +156,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       const days = 5;
       var currentDate = DateTime.now();
       int currentDay = 1;
-      List<NextDayWeatherModel>? list = await _weatherLocalDataSource.getNextDayWeatherModelList(lat, lon, currentDate);
+      List<NextDayWeatherModel>? list = await _weatherLocalDataSource.getNextDayWeatherModelList(lat, lon, currentDate.formatDay());
       if (list.isEmpty) {
         return Left(CacheDataNotFoundFailure(
             message: "There is no internet connection and you have no next days forecast previously stored locally"));
@@ -164,7 +167,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
         var key = DateTime(currentDate.year, currentDate.month, currentDate.day);
         ndwModelMap[key] = nextDayWeatherList;
         currentDate = currentDate.add(const Duration(days: 1));
-        list = await _weatherLocalDataSource.getNextDayWeatherModelList(lat, lon, currentDate);
+        list = await _weatherLocalDataSource.getNextDayWeatherModelList(lat, lon, currentDate.formatDay());
         currentDay++;
       }
 
@@ -186,9 +189,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
   Future<void> _tryCacheNextDayWeatherModelList(
       double lat, double lon, DateTime dateTime, List<NextDayWeatherModel> ndwModelList) async {
     try {
-      await _weatherLocalDataSource.cacheNextDayWeatherModelList(lat, lon, dateTime, ndwModelList);
+      await _weatherLocalDataSource.cacheNextDayWeatherModelList(lat, lon, dateTime.formatDay(), ndwModelList);
     } on CacheCurrentWeatherException catch (_) {
-      GetIt.I.get<Logger>().e('Error caching current weather locally');
+      debugPrint('Error caching current weather locally');
     }
   }
 }

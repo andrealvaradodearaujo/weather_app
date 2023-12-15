@@ -7,9 +7,9 @@ part of 'sys_info_model.dart';
 // **************************************************************************
 
 SysInfoModel _$SysInfoModelFromJson(Map<String, dynamic> json) => SysInfoModel(
-      json['country'] as String,
-      json['sunrise'] as int,
-      json['sunset'] as int,
+      json['country'] as String?,
+      json['sunrise'] as int?,
+      json['sunset'] as int?,
     );
 
 Map<String, dynamic> _$SysInfoModelToJson(SysInfoModel instance) =>
