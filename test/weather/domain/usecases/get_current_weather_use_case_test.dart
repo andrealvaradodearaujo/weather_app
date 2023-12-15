@@ -1,16 +1,3 @@
-/// Unit tests for the [GetCurrentWeatherUseCase] class.
-///
-/// This test suite covers various scenarios for the GetCurrentWeatherUseCase,
-/// ensuring that it behaves correctly under different conditions, including
-/// successful weather retrieval, handling invalid cities, and managing
-/// repository failures.
-///
-/// The tests use the Mocktail library for creating mock objects.
-/// 
-/// Usage:
-/// ```dart
-/// pub run test test/weather/domain/usecases/get_current_weather_use_case_test.dart
-/// ```
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,6 +8,19 @@ import 'package:weather_app/features/weather/domain/entities/current_weather.dar
 import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
 import 'package:weather_app/features/weather/domain/usecases/get_current_weather_use_case.dart';
 
+/// Unit tests for the [GetCurrentWeatherUseCase] class.
+///
+/// This test suite covers various scenarios for the GetCurrentWeatherUseCase,
+/// ensuring that it behaves correctly under different conditions, including
+/// successful weather retrieval, handling invalid cities, and managing
+/// repository failures.
+///
+/// The tests use the Mocktail library for creating mock objects.
+///
+/// Usage:
+/// ```dart
+/// pub run test test/weather/domain/usecases/get_current_weather_use_case_test.dart
+/// ```
 class MockWeatherRepository extends Mock implements WeatherRepository {}
 
 void main() {
@@ -40,14 +40,14 @@ void main() {
   test('should get current weather for Silverstone, UK', () async {
     // Arrange
     when(() => mockRepository.getCurrentWeather(any(), any()))
-        .thenAnswer((_) async => Right(CurrentWeather())); // Success case
+        .thenAnswer((_) async => const Right(CurrentWeather())); // Success case
 
     // Act
     final result = await useCase(Strings.citySilverstoneUK);
 
     // Assert
     expect(result, isA<Right<Failure, CurrentWeather>>());
-    expect(result, Right(CurrentWeather()));
+    expect(result, const Right(CurrentWeather()));
     verify(() => mockRepository.getCurrentWeather(Settings.latSilverstoneUK, Settings.lonSilverstoneUK));
     verifyNoMoreInteractions(mockRepository);
   });
@@ -56,14 +56,14 @@ void main() {
   test('should get current weather for Sao Paulo, Brazil', () async {
     // Arrange
     when(() => mockRepository.getCurrentWeather(any(), any()))
-        .thenAnswer((_) async => Right(CurrentWeather())); // Success case
+        .thenAnswer((_) async => const Right(CurrentWeather())); // Success case
 
     // Act
     final result = await useCase(Strings.citySaoPauloBrazil);
 
     // Assert
     expect(result, isA<Right<Failure, CurrentWeather>>());
-    expect(result, Right(CurrentWeather()));
+    expect(result, const Right(CurrentWeather()));
     verify(() => mockRepository.getCurrentWeather(Settings.latSaoPauloBR, Settings.lonSaoPauloBR));
     verifyNoMoreInteractions(mockRepository);
   });

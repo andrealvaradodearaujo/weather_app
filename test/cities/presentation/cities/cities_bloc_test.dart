@@ -67,7 +67,7 @@ void main() {
       },
       act: (bloc) => bloc.add(SearchCityEvent(cities: cities, city: 'AnotherCity')),
       expect: () => [
-        CitiesLoadedState(allCities: cities, filteredCities: []),
+        CitiesLoadedState(allCities: cities, filteredCities: const []),
       ],
       verify: (_) {
         verifyNever(() => mockGetCitiesUseCase());

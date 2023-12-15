@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
 import 'package:weather_app/core/error/exception.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/core/utils/internet_connection_checker.dart';

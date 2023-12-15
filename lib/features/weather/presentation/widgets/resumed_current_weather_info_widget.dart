@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/core/resources/strings.dart';
+import 'package:weather_app/core/resources/widget_keys.dart';
 import 'package:weather_app/core/ui/rounded_button.dart';
 import 'package:weather_app/features/weather/presentation/bloc/next_days_forecast/next_days_forecast_bloc.dart';
 
@@ -126,6 +127,7 @@ class ResumedCurrentWeatherInfoWidget extends StatelessWidget {
                 height: 15.h,
               ),
               RoundedButton(
+                key: const ValueKey(WidgetKeys.nextDaysForecastButton),
                 onTapFunction: () {
                   BlocProvider.of<NextDaysForecastBloc>(context).add(GetNextDaysForecastEvent(city: cityCountry ?? ""));
                   Routemaster.of(context).push('/nextDaysForecast/$cityCountry');

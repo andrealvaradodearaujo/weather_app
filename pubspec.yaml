@@ -35,7 +35,8 @@ dev_dependencies:
   json_serializable:
   injectable_generator:
   flutter_lints: ^3.0.1
-
+  integration_test:
+    sdk: flutter
 
 # The following section is specific to Flutter packages.
 flutter:

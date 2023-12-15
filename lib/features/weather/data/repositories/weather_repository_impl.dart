@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:collection';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app/core/error/exception.dart';
 import 'package:weather_app/core/error/failure.dart';

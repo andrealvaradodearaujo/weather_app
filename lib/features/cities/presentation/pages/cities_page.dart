@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
 import 'package:weather_app/core/resources/strings.dart';
+import 'package:weather_app/core/resources/widget_keys.dart';
 import 'package:weather_app/features/cities/presentation/bloc/cities_bloc.dart';
 import 'package:weather_app/features/weather/presentation/bloc/current_weather/current_weather_bloc.dart';
 
@@ -35,6 +36,7 @@ class _CitiesPageState extends State<CitiesPage> {
               child: Column(
                 children: [
                   TextField(
+                    key: const ValueKey(WidgetKeys.searchTextField),
                     onChanged: (selectedCity) {
                       BlocProvider.of<CitiesBloc>(context).add(SearchCityEvent(
                           city: selectedCity, cities: (state is CitiesLoadedState) ? state.allCities : []));

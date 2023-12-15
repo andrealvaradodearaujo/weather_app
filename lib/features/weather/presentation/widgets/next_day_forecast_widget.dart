@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/resources/dart_extensions/date_extensions.dart';
 import 'package:weather_app/core/resources/dimensions.dart';
+import 'package:weather_app/core/resources/widget_keys.dart';
 import 'package:weather_app/features/weather/domain/entities/next_day_weather.dart';
 import 'package:weather_app/features/weather/presentation/widgets/next_day_by_hour_weather_widget.dart';
 import 'package:weather_app/features/weather/presentation/widgets/resumed_next_day_by_hour_weather_widget.dart';
@@ -41,6 +42,7 @@ class NextDayForecastWidget extends StatelessWidget {
           itemCount: nextDayWeatherList.length,
           itemBuilder: (context, index) {
             return ResumedNextDayByHourWeatherWidget(
+              key: ValueKey('${WidgetKeys.nextDayForecastDetails}-$index'),
               hourMin: nextDayWeatherList[index].dt.formatHourMin(),
               iconUrl: nextDayWeatherList[index].iconUrl,
               temperature: nextDayWeatherList[index].temp,
