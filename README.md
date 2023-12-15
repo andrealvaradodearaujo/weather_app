@@ -6,13 +6,15 @@ Welcome to the Weather App, a Flutter application designed to track weather cond
 
 ### Functionality
 
-The app includes two main screens:
+The app includes these main screens:
 
 1. **City list:**
     - Supports searching for a city by name.
 
-2. **Weather conditions:**
+2. **Current weather:**
     - Displays the current weather information for the selected city.
+   
+3. **Forecast:**
     - Presents the weather forecast for the next 5 days in the selected city.
    
 ### Main Cities
@@ -91,6 +93,14 @@ To run the Weather App and access weather data from the OpenWeatherMap API, you 
    ```bash
     flutter test
    ```
+
+## Integration Tests
+
+Integration tests ensure that different parts of the application work together correctly. These tests may involve multiple screens and functionalities. To run integration tests, use the following command:
+   ```bash
+    flutter test integration_test
+   ```
+Make sure that you have a connected device or emulator before running the integration tests.
 
 ## Deploying the App
 

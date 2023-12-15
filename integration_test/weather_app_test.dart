@@ -15,18 +15,18 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Assuming your search field has a specific key or some unique identifier.
+    // Search for "Sao" at the search text field
     await tester.enterText(find.byKey(const Key(WidgetKeys.searchTextField)), 'Sao');
     await tester.pumpAndSettle();
 
-    // Assuming the first result is "Sao Paulo, Brazil".
+    // Taps on "São Paulo, Brazil" as one of the results from previous search
     await tester.tap(find.text(Strings.citySaoPauloBrazil));
     await tester.pumpAndSettle();
 
-    // Verify if the current weather page is loaded.
+    // Verify if the current weather page is loaded
     expect(find.byType(CurrentWeatherPage), findsOneWidget);
 
-    // Assuming the button to view the next 5 days forecast has a specific key.
+    // Taps on the button to view the next 5 days forecast
     await tester.tap(find.byKey(const Key(WidgetKeys.nextDaysForecastButton)));
     await tester.pumpAndSettle();
 
