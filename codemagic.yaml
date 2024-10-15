@@ -3,7 +3,12 @@ workflows:
     name: Android Build
     environment:
       flutter: "3.19.6"
+      vars:
+        API_KEY: $API_KEY # Definir no painel do Codemagic
     scripts:
+      - name: Create config.dart
+        script: |
+          echo "const String apiKey = '$API_KEY';" > lib/config.dart
       - name: Get dependencies
         script: |
           flutter pub get
