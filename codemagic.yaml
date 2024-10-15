@@ -8,7 +8,7 @@ workflows:
     scripts:
       - name: Create config.dart
         script: |
-          echo "const String apiKey = '$API_KEY';" > lib/config.dart
+          echo "const String apiKey = '$API_KEY';" > lib/config/config.dart
       - name: Get dependencies
         script: |
           flutter pub get
